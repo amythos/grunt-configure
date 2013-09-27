@@ -5,6 +5,15 @@ var path = require('path');
 var merge = require('./lib/merge');
 
 var ConfigurationLoaders = {
+  '.coffee': function(file) {
+    var result = require(file);
+    
+    if (_.isFunction(result)) {
+      result = result();
+    }
+    
+    return result;
+  },
   '.js': function(file) {
     var result = require(file);
     
